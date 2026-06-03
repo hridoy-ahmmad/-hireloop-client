@@ -11,11 +11,7 @@ export default function Footer() {
 
                     {/* Logo Section */}
                     <div>
-                        <img
-                            src="/logo.png"
-                            alt="Hireloop"
-                            className="h-9 w-auto"
-                        />
+                        logo
 
                         <p className="mt-5 max-w-xs text-sm leading-7 text-gray-500">
                             The AI-native career platform. Built for people

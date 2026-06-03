@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import { Bars, Xmark } from "@gravity-ui/icons";
-import Image from "next/image";
+
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
@@ -16,16 +16,12 @@ export default function Navbar() {
     ];
 
     return (
-        <header className="sticky top-0 z-30 w-full px-4 py-3 bg-black/90">
+        <header className=" z-30 w-full px-4 py-3 bg-black/90">
             <nav className="mx-auto max-w-7xl rounded-2xl bg-black/90 text-white">
                 <div className="flex h-18.5 items-center justify-between px-6">
                     {/* Logo */}
                     <Link href="/" className="flex items-center">
-                        {/* <Image
-              src="/logo.png"
-              alt="Hireloop"
-              className="h-10 w-auto"
-            /> */}
+                   
                         logo
                     </Link>
 
@@ -42,7 +38,7 @@ export default function Navbar() {
                         ))}
 
                         {/* Desktop Actions */}
-                        <div className="h-5 w-px bg-gray-500"/>
+                        <div className="h-5 w-px bg-gray-500" />
                         <div className="hidden  items-center gap-8 md:flex">
                             <Link
                                 href="/login"
@@ -54,7 +50,9 @@ export default function Navbar() {
                             <Button
                                 className="h-12  rounded-xl bg-[#6C63FF] px-7 text-base font-semibold text-white"
                             >
-                                Get Started
+                                <Link href={'/signup'}>
+                                    Get Started
+                                </Link>
                             </Button>
                         </div>
                     </div>
@@ -98,7 +96,9 @@ export default function Navbar() {
                             </Link>
 
                             <Button className="w-full rounded-xl bg-[#6C63FF] text-white">
-                                Get Started
+                                <Link href={'/signup'}>
+                                    Get Started
+                                </Link>
                             </Button>
                         </div>
                     </div>
