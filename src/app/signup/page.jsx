@@ -6,7 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FaGoogle, FaRegEye, FaRegEyeSlash } from "react-icons/fa6";
 import { FiCheck } from "react-icons/fi";
-import { Button, Description, FieldError, Form, Input, Label, TextField } from "@heroui/react";
+import { Button, Description, FieldError, Form, Input, Label, Radio, RadioGroup, TextField } from "@heroui/react";
 
 export default function SignUpForm() {
     const [isLoading, setIsLoading] = useState(false);
@@ -27,7 +27,9 @@ export default function SignUpForm() {
                 name: info.name,
                 email: info.email,
                 password: info.password,
+                role: info.role
             });
+
             if (error) {
                 setAuthError(error.message || "Something went wrong during signup.");
                 console.error("Signup error:", error);
@@ -196,6 +198,29 @@ export default function SignUpForm() {
 
                 <FieldError className="mt-1 text-xs text-red-400" />
             </TextField>
+
+
+            {/* Radio Options */}
+            <RadioGroup defaultValue="seeker" name="role">
+                <Label className="text-white">What is your role?</Label>
+                <Radio value="seeker">
+                    <Radio.Control>
+                        <Radio.Indicator />
+                    </Radio.Control>
+                    <Radio.Content>
+                        <Label className="text-white">Job Seeker</Label>
+                    </Radio.Content>
+                </Radio>
+                <Radio value="Recruiter">
+                    <Radio.Control>
+                        <Radio.Indicator />
+                    </Radio.Control>
+                    <Radio.Content>
+                        <Label className="text-white">Recruiter</Label>
+                    </Radio.Content>
+                </Radio>
+
+            </RadioGroup>
 
             {/* Buttons */}
             <div className="flex gap-3 pt-2">
