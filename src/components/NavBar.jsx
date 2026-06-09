@@ -4,16 +4,29 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@heroui/react";
 import { Bars, Xmark } from "@gravity-ui/icons";
+import { authClient, useSession } from "@/lib/auth-client";
+import { ConfimrSignOut } from "./ConfimrSignOut";
+
 
 
 export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
+    const { data: session } = useSession()
+    const user = session?.user
+    console.log(user);
 
     const navLinks = [
         { label: "Browse Jobs", href: "/jobs" },
         { label: "Company", href: "/company" },
         { label: "Pricing", href: "/pricing" },
     ];
+    const handleSignOut = async () => {
+        await authClient.signOut({
+                onSuccess: () => {
+                    router.push("/login"); // redirect to login page
+            },
+        });
+    }
 
     return (
         <header className=" z-30 w-full px-4 py-3 bg-black/90">
@@ -21,7 +34,7 @@ export default function Navbar() {
                 <div className="flex h-18.5 items-center justify-between px-6">
                     {/* Logo */}
                     <Link href="/" className="flex items-center">
-                   
+
                         logo
                     </Link>
 
@@ -39,22 +52,27 @@ export default function Navbar() {
 
                         {/* Desktop Actions */}
                         <div className="h-5 w-px bg-gray-500" />
-                        <div className="hidden  items-center gap-8 md:flex">
-                            <Link
-                                href="/login"
-                                className="text-[18px] font-medium text-[#7B6DFF] hover:opacity-90"
-                            >
-                                Sign In
-                            </Link>
-
-                            <Button
-                                className="h-12  rounded-xl bg-[#6C63FF] px-7 text-base font-semibold text-white"
-                            >
-                                <Link href={'/signup'}>
-                                    Get Started
+                        {
+                            user ? <div className="flex gap-2 items-center">
+                                <p>Hi, <span className="font-bold text-red-600">{user?.name}</span>!</p>
+                                <ConfimrSignOut handleSignOut={handleSignOut} />
+                            </div> : <div className="hidden  items-center gap-8 md:flex">
+                                <Link
+                                    href="/signIn"
+                                    className="text-[18px] font-medium text-[#7B6DFF] hover:opacity-90"
+                                >
+                                    Sign In
                                 </Link>
-                            </Button>
-                        </div>
+
+                                <Button
+                                    className="h-12  rounded-xl bg-[#6C63FF] px-7 text-base font-semibold text-white"
+                                >
+                                    <Link href={'/signup'}>
+                                        Get Started
+                                    </Link>
+                                </Button>
+                            </div>
+                        }
                     </div>
 
 
