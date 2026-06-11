@@ -12,8 +12,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-theme="dark"
-      className="dark h-full antialiased"
-    >
+      className="dark h-full antialiased">
       <body className="min-h-full flex flex-col">
         <Navbar />
         <main>
