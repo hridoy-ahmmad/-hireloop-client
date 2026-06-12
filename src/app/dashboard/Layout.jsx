@@ -1,13 +1,14 @@
-import React from 'react';
+import { SideBar } from '@/DashBoardComponent/SideBar';
 
-const Layout = ({ children }) => {
+const DashboardLayout = ({ children }) => {
 
     return (
-        <div>
-            <div>
+        <div className='container mx-auto min-h-screen flex'>
+            <SideBar />
+            <div className='w-full'>
                 {children}
             </div>
         </div>
     );
 };
-export default Layout;
+export default DashboardLayout;
