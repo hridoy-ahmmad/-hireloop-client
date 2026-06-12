@@ -11,27 +11,7 @@ const users = [
     role: "CEO",
     status: "Active",
   },
-  {
-    email: "john@acme.com",
-    id: 2,
-    name: "John Smith",
-    role: "CTO",
-    status: "Active",
-  },
-  {
-    email: "sara@acme.com",
-    id: 3,
-    name: "Sara Johnson",
-    role: "CMO",
-    status: "On Leave",
-  },
-  {
-    email: "michael@acme.com",
-    id: 4,
-    name: "Michael Brown",
-    role: "CFO",
-    status: "Active",
-  },
+
 ];
 
 export default function DashBoardTable() {

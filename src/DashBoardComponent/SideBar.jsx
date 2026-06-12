@@ -1,27 +1,30 @@
 
-import {  Bell, Envelope, Gear, House, LayoutSplitSideContentRight, Magnifier, Person } from "@gravity-ui/icons";
+import { Bell, CirclePlusFill, Envelope, Gear, House, LayoutSplitSideContentRight, Magnifier, Person } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
+import Link from "next/link";
 
 export function SideBar() {
     const navItems = [
-        { icon: House, label: "Home" },
-        { icon: Magnifier, label: "Search" },
-        { icon: Bell, label: "Notifications" },
-        { icon: Envelope, label: "Messages" },
-        { icon: Person, label: "Profile" },
-        { icon: Gear, label: "Settings" },
+        { icon: House, label: "Home", href: '/'},
+        { icon: Magnifier, label: "Search", href: '/'},
+        { icon: Bell, label: "Notifications", href: '/'},
+        { icon: Envelope, label: "Messages", href: '/'},
+        { icon: Person, label: "Profile", href: '/'},
+        { icon: Gear, label: "Settings", href: '/'},
+        { icon: CirclePlusFill, label: "Add New Job", href: 'http://localhost:3000/dashboard/recruiter/jobs/new' },
     ];
 
     const sideLinks = <nav className="flex flex-col gap-1">
         {navItems.map((item) => (
-            <button
+            <Link
+                href={item.href}
                 key={item.label}
                 className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm text-foreground transition-colors hover:bg-default"
                 type="button"
             >
                 <item.icon className="size-5 text-muted" />
                 {item.label}
-            </button>
+            </Link>
         ))}
     </nav>
 
@@ -43,8 +46,8 @@ export function SideBar() {
             <div className="lg:hidden">
                 <Drawer>
                     <Button variant="secondary">
-                        
-                      <LayoutSplitSideContentRight/>
+
+                        <LayoutSplitSideContentRight />
                         Menu
                     </Button>
 

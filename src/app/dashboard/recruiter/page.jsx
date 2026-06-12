@@ -53,7 +53,7 @@ const RecruiterHomePage = () => {
                     {/* Top companies */}
                     <div className='w-full md:flex-1 '>
                         <div className='flex justify-between text-gray-300 my-2'>
-                            <h1 className='text-xl'>Recent Applications</h1>
+                            <h1 className='text-xl'>My Top Companies</h1>
                             <p>View All</p>
                         </div>
                         <TopCompanies />
