@@ -13,7 +13,6 @@ export default function Navbar() {
     const [isOpen, setIsOpen] = useState(false);
     const { data: session } = useSession()
     const user = session?.user
-    console.log(user);
 
     const navLinks = [
         { label: "Browse Jobs", href: "/jobs" },

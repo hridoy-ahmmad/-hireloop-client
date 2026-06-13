@@ -11,9 +11,11 @@ import {
     ListBox,
     TextArea,
     Button,
-    FieldError
+    FieldError,
+    toast
 } from '@heroui/react';
 import { Xmark } from '@gravity-ui/icons';
+import { postJobs } from '@/lib/actions/jobs';
 
 export default function CreateJobForm({ onClose }) {
     // Local state tracking for the "Remote" configuration toggle
@@ -21,28 +23,40 @@ export default function CreateJobForm({ onClose }) {
     // State to catch and display custom validation errors
     const [errors, setErrors] = useState({});
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        
+
         // Clear previous validation errors
         setErrors({});
-        
-        const formData = new FormData(e.currentTarget);
+        const form = e.currentTarget
+        const formData = new FormData(form);
         const data = Object.fromEntries(formData);
         data.isRemote = isRemote;
 
         // Custom validation check: Ensure max salary is greater than min salary
         const minSalary = Number(data.salaryMin);
         const maxSalary = Number(data.salaryMax);
-        
+
         if (minSalary && maxSalary && maxSalary < minSalary) {
             setErrors({
                 salaryMax: "Maximum salary cannot be less than the minimum salary."
             });
             return;
         }
+        const newJobData = {
+            ...data
+        }
+        console.log(newJobData);
 
-        console.log('Job Creation Submitted Data:', data);
+        const res = await postJobs(newJobData);
+        if (res?.insertedId) {
+            form.reset()
+            setIsRemote(false)
+          toast.success('success')
+        } else {
+            toast.error('err')
+        }
+
     };
 
     return (
@@ -163,7 +177,7 @@ export default function CreateJobForm({ onClose }) {
                                     />
                                     <FieldError className="text-xs text-red-500 mt-1" />
                                 </TextField>
-                                
+
                                 <TextField name="salaryMax" isRequired isInvalid={!!errors.salaryMax} className="flex flex-col">
                                     <Input
                                         type="number"
