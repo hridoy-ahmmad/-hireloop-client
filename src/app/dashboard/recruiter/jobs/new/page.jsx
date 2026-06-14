@@ -44,7 +44,9 @@ export default function CreateJobForm({ onClose }) {
             return;
         }
         const newJobData = {
-            ...data
+            ...data,
+            status: 'active',
+            companyId:'company_123'
         }
         console.log(newJobData);
 
@@ -52,12 +54,14 @@ export default function CreateJobForm({ onClose }) {
         if (res?.insertedId) {
             form.reset()
             setIsRemote(false)
-          toast.success('success')
+            toast.success('success')
         } else {
             toast.error('err')
         }
 
     };
+
+    
 
     return (
         <div className="w-full max-w-2xl mx-auto rounded-xl bg-[#121212] border border-[#262626] text-white shadow-2xl overflow-hidden font-sans">

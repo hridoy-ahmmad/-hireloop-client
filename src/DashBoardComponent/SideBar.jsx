@@ -1,17 +1,17 @@
 
-import { Bell, CirclePlusFill, Envelope, Gear, House, LayoutSplitSideContentRight, Magnifier, Person } from "@gravity-ui/icons";
+import { Bell, Briefcase, Envelope, Gear, House, LayoutSplitSideContentRight, Magnifier, Person } from "@gravity-ui/icons";
 import { Button, Drawer } from "@heroui/react";
 import Link from "next/link";
 
 export function SideBar() {
     const navItems = [
-        { icon: House, label: "Home", href: '/'},
-        { icon: Magnifier, label: "Search", href: '/'},
-        { icon: Bell, label: "Notifications", href: '/'},
-        { icon: Envelope, label: "Messages", href: '/'},
-        { icon: Person, label: "Profile", href: '/'},
-        { icon: Gear, label: "Settings", href: '/'},
-        { icon: CirclePlusFill, label: "Add New Job", href: 'http://localhost:3000/dashboard/recruiter/jobs/new' },
+        { icon: House, href: "/dashboard/recruiter", label: "Home" },
+        { icon: Magnifier, href: "/dashboard/recruiter/jobs", label: "Jobs" },
+        { icon: Bell, href: "/dashboard/recruiter/jobs/new", label: "Post A Job" },
+        { icon: Briefcase, href: "/dashboard/recruiter/company", label: "Company Profile" },
+        { icon: Envelope, href: "/messages", label: "Messages" },
+        { icon: Person, href: "/profile", label: "Profile" },
+        { icon: Gear, href: "/settings", label: "Settings" },
     ];
 
     const sideLinks = <nav className="flex flex-col gap-1">
