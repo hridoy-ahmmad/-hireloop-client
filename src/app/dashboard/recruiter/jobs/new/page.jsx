@@ -27,7 +27,7 @@ export default function CreateJobForm({ onClose }) {
         e.preventDefault();
 
         // Clear previous validation errors
-        setErrors({});
+
         const form = e.currentTarget
         const formData = new FormData(form);
         const data = Object.fromEntries(formData);
@@ -37,7 +37,7 @@ export default function CreateJobForm({ onClose }) {
         const minSalary = Number(data.salaryMin);
         const maxSalary = Number(data.salaryMax);
 
-        if (minSalary && maxSalary && maxSalary < minSalary) {
+        if (maxSalary < minSalary) {
             setErrors({
                 salaryMax: "Maximum salary cannot be less than the minimum salary."
             });
@@ -46,7 +46,7 @@ export default function CreateJobForm({ onClose }) {
         const newJobData = {
             ...data,
             status: 'active',
-            companyId:'company_123'
+            companyId: 'company_123'
         }
         console.log(newJobData);
 
@@ -61,7 +61,7 @@ export default function CreateJobForm({ onClose }) {
 
     };
 
-    
+
 
     return (
         <div className="w-full max-w-2xl mx-auto rounded-xl bg-[#121212] border border-[#262626] text-white shadow-2xl overflow-hidden font-sans">
@@ -186,6 +186,15 @@ export default function CreateJobForm({ onClose }) {
                                     <Input
                                         type="number"
                                         min="0"
+                                        onChange={() => {
+                                            if (errors) {
+                                                setErrors(prev => ({
+                                                    ...prev,
+                                                    salaryMax: ""
+                                                }));
+                                            }
+                                        }}
+
                                         variant="secondary"
                                         placeholder="Max (e.g. 120000)"
                                         className="w-full bg-[#1c1c1c] border border-[#2f2f2f] text-sm text-white rounded-lg px-3 py-2.5 placeholder-[#525252] focus:outline-none"
