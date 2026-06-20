@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Button, Input, Label, Modal, TextField } from "@heroui/react";
 import { companyPost } from "@/lib/actions/company";
 
-export function RegisterCompany() {
+export function RegisterCompany({ user }) {
   // State management for form entries
   const [formData, setFormData] = useState({});
   const [logoFile, setLogoFile] = useState(null);
@@ -71,7 +71,8 @@ export function RegisterCompany() {
         location: formData.location,
         employeeCount: formData.employeeCount,
         description: formData.description,
-        logoUrl: logoURl
+        logoUrl: logoURl,
+        userId: user?.id
       };
 
       // from lib
