@@ -2,7 +2,8 @@ import Image from "next/image";
 
 export function CompanyCard({ company }) {
     const isApproved = company.status === 'APPROVED';
-console.log(company.logoUrl);
+
+console.log(company);
 
     return (
         <div className="bg-[#1c1c1e] border border-[#2c2c2e] rounded-2xl p-6 flex flex-col justify-between hover:border-gray-700 transition-colors duration-200">
@@ -11,7 +12,7 @@ console.log(company.logoUrl);
                 <div className="flex items-start justify-between gap-3 mb-4">
                     <div className="flex items-center gap-3">
                         {/* Company Logo Wrapper */}
-                        <div className="w-12 h-12 rounded-xl   flex items-center justify-center font-bold text-xl overflow-hidden shrink-0">
+                        <div >
                             {/* Replace with <Image src={...} /> or SVG as needed */}
                             <Image alt={company.companyName} src= {company.logoUrl} height={48} width={48}/>
                         </div>
@@ -59,7 +60,7 @@ console.log(company.logoUrl);
                         <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
                         </svg>
-                        <span>{company.sizeRange}</span>
+                        <span>{company.employeeCount}</span>
                     </div>
                 </div>
 

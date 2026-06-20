@@ -1,12 +1,12 @@
 import { CompanyCard } from '@/DashBoardComponent/CompanyCard';
 import { RegisterCompany } from '@/DashBoardComponent/RegisterCompany';
 
-import React from 'react';
 
 
 export default async function MyCompanies() {
     const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/companies`)
     const data = await res.json()
+
     console.log(data);
 
     return (

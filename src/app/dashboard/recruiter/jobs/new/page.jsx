@@ -12,7 +12,6 @@ import {
     TextArea,
     Button,
     FieldError,
-    toast
 } from '@heroui/react';
 import { Xmark } from '@gravity-ui/icons';
 import { postJobs } from '@/lib/actions/jobs';
@@ -48,15 +47,16 @@ export default function CreateJobForm({ onClose }) {
             status: 'active',
             companyId: 'company_123'
         }
-        console.log(newJobData);
 
         const res = await postJobs(newJobData);
+        console.log(res);
+        
         if (res?.insertedId) {
             form.reset()
             setIsRemote(false)
-            toast.success('success')
+          alert('success')
         } else {
-            toast.error('err')
+          alert('error')
         }
 
     };

@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { Button, Input, Label, Modal, TextField } from "@heroui/react";
+import { companyPost } from "@/lib/actions/company";
 
 export function RegisterCompany() {
   // State management for form entries
@@ -9,6 +10,7 @@ export function RegisterCompany() {
   const [logoFile, setLogoFile] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [error, setError] = useState('')
 
   // Generic input change handler
   const handleInputChange = (e) => {
@@ -21,15 +23,29 @@ export function RegisterCompany() {
     if (e.target.files && e.target.files[0]) {
       setLogoFile(e.target.files[0]);
     }
-  };
+    const file = e.target.files?.[0];
 
+    if (!file) return;
+
+    if (file.size > 1 * 1024 * 1024) {
+      setError("Logo image must be less than 1 MB");
+      e.target.value = "";
+      setLogoFile(null);
+      return;
+    }
+
+    setLogoFile(file);
+    setError('')
+  }
   // Submit Handler
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (logoFile && logoFile.size > 1 * 1024 * 1024) {
+      setError("Logo image must be less than 1 MB");
+      return;
+    }
+
     setIsSubmitting(true);
-
-
-
 
     try {
       let logoURl = ''
@@ -58,18 +74,8 @@ export function RegisterCompany() {
         logoUrl: logoURl
       };
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}/api/companies`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(companyData),
-        }
-      );
-
-      const result = await response.json();
+      // from lib
+      const result = companyPost(companyData)
       console.log("Success:", result);
 
       // Reset Form & Close Modal on success
@@ -239,7 +245,10 @@ export function RegisterCompany() {
                         <p className="text-xs font-medium text-gray-300 truncate max-w-[180px]">
                           {logoFile ? logoFile.name : "Upload image"}
                         </p>
-                        <p className="text-[10px] text-gray-500 mt-0.5">PNG, JPG up to 5MB</p>
+                        <p className="text-[10px] text-gray-500 mt-0.5">PNG, JPG up to 1MB</p>
+                        <p className="text-red-500 text-[12px]">{
+                          error
+                        }</p>
                       </div>
                     </div>
                   </div>
